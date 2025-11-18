@@ -33,9 +33,9 @@ export const EventsProvider = ({children}) => {
         return posts.find((item) => item.id === id);
     }
 
-    function addPost(data) {
-        const updatedPosts = posts;
-        
+    function addPost(posts, data) {
+        const updatedPosts = [...posts];
+
         let newId = 0;
         for (let i = 0; i < posts.length; i++) {
             const item = posts[i];
@@ -47,17 +47,10 @@ export const EventsProvider = ({children}) => {
             id: newId,
             title: data["title"],
             body: data["body"],
-        })
-        // setPosts(updatedPosts);
-
-        dispatch({
-            type: "added",
-            post: {
-                id: newId,
-                title: data["title"],
-                body: data["body"],
-            }
         });
+
+        // setPosts(updatedPosts);
+        return updatedPosts;
     }
 
     function updatePost(id, data) {
@@ -78,8 +71,7 @@ export const EventsProvider = ({children}) => {
                 return action.posts;
 
             case "added":
-                addPost(action.posts)
-                break;
+                return addPost(posts, action.post);
 
             case "removed":
 
@@ -92,7 +84,7 @@ export const EventsProvider = ({children}) => {
     }
 
     return (
-        <EventsContext.Provider value={{posts, removePost, addPost, getPost, updatePost}}>
+        <EventsContext.Provider value={{posts, removePost, addPost, getPost, updatePost, dispatch}}>
             {children}
         </EventsContext.Provider>
     )
