@@ -20,8 +20,9 @@ export const EventsProvider = ({children}) => {
         }, 1000);
     }, []);
 
-    function removePost(id) {
-        const newPosts = posts.filter(post => post.id !== id);
+    function removePost(posts, id) {
+        const updatedPosts = [...posts].filter(post => post.id !== id);
+        return updatedPosts;
         // setPosts(newPosts);
     }
 
@@ -74,11 +75,10 @@ export const EventsProvider = ({children}) => {
                 return addPost(posts, action.post);
 
             case "removed":
-
-                break;
+                return removePost(posts, action.id)
 
             case "updated":
-
+                // return updatePost(posts, action.id)
                 break;
         }
     }

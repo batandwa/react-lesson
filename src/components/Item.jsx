@@ -3,7 +3,7 @@ import { useEvents } from "../context/EventsContext";
 import CustomLink from "./Link";
 
 export default function Item(props) {
-    const {removePost} = useEvents();
+    const {removePost, dispatch} = useEvents();
     return (
         <li>
             <CustomLink url={props.url} title={props.title}>
@@ -12,7 +12,7 @@ export default function Item(props) {
             &nbsp;&nbsp;&nbsp;
             <Link to={`/events/${props.itemId}/edit`}>Edit</Link>
             &nbsp;&nbsp;&nbsp;
-            <a href="#" onClick={() => removePost(props.itemId)}>Delete</a>
+            <a href="#" onClick={() => dispatch({type: "removed", id: props.itemId})}>Delete</a>
         </li>
     );
 }
