@@ -2,7 +2,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { useEvents } from "../context/EventsContext";
 
 export default function EventForm() {
-    const {addPost, getPost, updatePost, dispatch} = useEvents();
+    const {posts, dispatch} = useEvents();
     const navigate = useNavigate();
     const {id} = useParams();
 
@@ -32,7 +32,8 @@ export default function EventForm() {
         navigate("/events");
     }
 
-    const post = getPost(parseInt(id)) || {};
+    // const post = getPost(parseInt(id)) || {};
+    const post = posts.find((item) => item.id === parseInt(id));
 
     return (
         <>
