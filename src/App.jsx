@@ -5,20 +5,27 @@ import EventForm from './pages/EventForm.jsx';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Event from './pages/Event.jsx';
 import { EventsProvider } from './context/EventsContext.jsx';
+import { Col, Container, Row } from 'react-bootstrap';
 
 function App() {
   return (
-    <EventsProvider>
-      <BrowserRouter>
-        <Routes>
-          <Route path='/' element={<EventList />} />
-          <Route path='/events' element={<EventList />} />
-          <Route path='/events/new' element={<EventForm />} />
-          <Route path='/events/:id' element={<Event />} />
-          <Route path='/events/:id/edit' element={<EventForm />} />
-        </Routes>
-      </BrowserRouter>
-    </EventsProvider>
+    <Container>
+      <Row>
+        <Col>
+          <EventsProvider>
+            <BrowserRouter>
+              <Routes>
+                <Route path='/' element={<EventList />} />
+                <Route path='/events' element={<EventList />} />
+                <Route path='/events/new' element={<EventForm />} />
+                <Route path='/events/:id' element={<Event />} />
+                <Route path='/events/:id/edit' element={<EventForm />} />
+              </Routes>
+            </BrowserRouter>
+          </EventsProvider>
+        </Col>
+      </Row>
+    </Container>
   )
 }
 
