@@ -1,7 +1,8 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import './App.css';
+// import './App.css';
 import EventList from './pages/EventList.jsx';
 import EventForm from './pages/EventForm.jsx';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import Event from './pages/Event.jsx';
 import { EventsProvider } from './context/EventsContext.jsx';
 

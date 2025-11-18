@@ -3,6 +3,7 @@ import Item from "../components/Item";
 import Navigation from "../components/Navigation";
 import { useEvents } from "../context/EventsContext";
 import { Link } from "react-router-dom";
+import { Alert, Button, InputGroup } from "react-bootstrap";
 
 export default function EventList() {
     const {posts, dispatch} = useEvents();
@@ -20,8 +21,11 @@ export default function EventList() {
     return (
         <>
             <form action={search}>
-                <input type="text" name="term" defaultValue={term} />
-                <input type="submit" value="Search" />
+                <div class="mb-3 mt-3">
+                    <label for="email" class="form-label">Email:</label>
+                    <input type="text" class="form-control" placeholder="eg: Harry" name="term" defaultValue={term} />
+                </div>
+                <Button type="submit" class="btn btn-primary" value="Search">Search</Button>
             </form>
             <Navigation title="Main Menu!!">
                 <Link to="/events/new">Add Event</Link>

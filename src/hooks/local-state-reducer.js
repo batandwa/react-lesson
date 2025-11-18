@@ -14,7 +14,7 @@ export function useLocalStateReducer(reducer, initial, key) {
 
     useEffect(() => {
         localStorage.setItem(key, JSON.stringify(state))
-    }, [state])
+    }, [state, key])
 
     return [state, dispatch]
 }
