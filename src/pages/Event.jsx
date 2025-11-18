@@ -11,7 +11,7 @@ export default function Event() {
                 const data = await response.json();
                 setPost(data);
             })
-    }, []);
+    }, [id, post]);
 
     if(post)
         return (

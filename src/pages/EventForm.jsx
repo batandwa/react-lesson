@@ -2,15 +2,22 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { useEvents } from "../context/EventsContext";
 
 export default function EventForm() {
-    const {addPost, getPost} = useEvents();
+    const {addPost, getPost, updatePost} = useEvents();
     const navigate = useNavigate();
     const {id} = useParams();
 
     function handleSubmit(data) {
-        addPost({
-            title: data.get("title"),
-            body: data.get("body"),
-        });
+        if(!data.get("id")) {
+            addPost({
+                title: data.get("title"),
+                body: data.get("body"),
+            });
+        } else {
+            updatePost(data.get("id"), {
+                title: data.get("title"),
+                body: data.get("body"),
+            })
+        }
         navigate("/events");
     }
 
@@ -20,7 +27,7 @@ export default function EventForm() {
         <>
             <h2>Event</h2>
             <form action={handleSubmit}>
-                <input type="hidden" name="id" />
+                <input type="hidden" name="id" defaultValue={post.id} />
                 <div>
                     Title&nbsp;&nbsp;
                     <input type="text" name="title" defaultValue={post.title} />

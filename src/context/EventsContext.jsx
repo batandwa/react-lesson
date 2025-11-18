@@ -20,21 +20,45 @@ export const EventsProvider = ({children}) => {
     }
 
     function getPost(id) {
+        // This is the wrong way to do this 
+        // this data should be fetched using an API request.
+        // The data contained in the posts value could be 
+        // outdated.
         return posts.find((item) => item.id === id);
     }
 
     function addPost(data) {
         const updatedPosts = posts;
+        
+        let newId = 0;
+        for (let i = 0; i < posts.length; i++) {
+            const item = posts[i];
+            if(item.id >= newId) {
+                newId = item.id + 1;
+            }
+        }
         updatedPosts.push({
-            id: posts.length,
+            id: newId,
             title: data["title"],
             body: data["body"],
         })
         setPosts(updatedPosts);
     }
 
+    function updatePost(id, data) {
+        const updatedPosts = posts.map(item => {
+            if(item.id == id) {
+                item["title"] = data["title"];
+                item["body"] = data["body"];
+            }
+            return item;
+        });
+
+        setPosts(updatedPosts);
+    }
+
     return (
-        <EventsContext.Provider value={{posts, setPosts, removePost, addPost, getPost}}>
+        <EventsContext.Provider value={{posts, setPosts, removePost, addPost, getPost, updatePost}}>
             {children}
         </EventsContext.Provider>
     )
