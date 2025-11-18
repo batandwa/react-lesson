@@ -18,10 +18,16 @@ export default function EventForm() {
                 post
             });
         } else {
-            updatePost(data.get("id"), {
+            const post = {
                 title: data.get("title"),
                 body: data.get("body"),
-            })
+            };
+            // updatePost(data.get("id"), post);
+            dispatch({
+                type: "updated",
+                id: data.get("id"),
+                post
+            });
         }
         navigate("/events");
     }

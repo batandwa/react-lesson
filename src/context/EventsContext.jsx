@@ -54,8 +54,8 @@ export const EventsProvider = ({children}) => {
         return updatedPosts;
     }
 
-    function updatePost(id, data) {
-        const updatedPosts = posts.map(item => {
+    function updatePost(posts, id, data) {
+        const updatedPosts = [...posts].map(item => {
             if(item.id == id) {
                 item["title"] = data["title"];
                 item["body"] = data["body"];
@@ -64,6 +64,7 @@ export const EventsProvider = ({children}) => {
         });
 
         // setPosts(updatedPosts);
+        return updatedPosts;
     }
 
     function postReducer(posts, action) {
@@ -75,11 +76,10 @@ export const EventsProvider = ({children}) => {
                 return addPost(posts, action.post);
 
             case "removed":
-                return removePost(posts, action.id)
+                return removePost(posts, action.id);
 
             case "updated":
-                // return updatePost(posts, action.id)
-                break;
+                return updatePost(posts, action.id, action.post);
         }
     }
 
