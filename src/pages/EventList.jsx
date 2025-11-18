@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 export default function EventList() {
     const {posts} = useEvents();
 
-    if(posts.length > 0)
+    if(posts && posts.length > 0)
     return (
         <Navigation title="Main Menu!!">
             <Link to="/events/new">Add Event</Link>

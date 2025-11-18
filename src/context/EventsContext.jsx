@@ -1,22 +1,28 @@
-import { createContext, useContext, useEffect, useState } from "react"
+import { createContext, useContext, useEffect, useReducer, useState } from "react"
 
 const EventsContext = createContext();
 
 export const EventsProvider = ({children}) => {
-    const [posts, setPosts] = useState([]);
+    // const [posts, setPosts] = useState([]);
+    const [posts, dispatch] = useReducer(postReducer, []);
+
     useEffect(() => {
         setTimeout(() => {
             fetch("https://jsonplaceholder.typicode.com/posts")
                 .then(async (response) => {
                     const data = await response.json(); 
-                    setPosts(data.slice(0, 10));
+                    // setPosts(data.slice(0, 10));
+                    dispatch({
+                        type: "initialise",
+                        posts: data.slice(0, 10)
+                    });
                 });
         }, 1000);
     }, []);
 
     function removePost(id) {
         const newPosts = posts.filter(post => post.id !== id);
-        setPosts(newPosts);
+        // setPosts(newPosts);
     }
 
     function getPost(id) {
@@ -42,7 +48,16 @@ export const EventsProvider = ({children}) => {
             title: data["title"],
             body: data["body"],
         })
-        setPosts(updatedPosts);
+        // setPosts(updatedPosts);
+
+        dispatch({
+            type: "added",
+            post: {
+                id: newId,
+                title: data["title"],
+                body: data["body"],
+            }
+        });
     }
 
     function updatePost(id, data) {
@@ -54,11 +69,30 @@ export const EventsProvider = ({children}) => {
             return item;
         });
 
-        setPosts(updatedPosts);
+        // setPosts(updatedPosts);
+    }
+
+    function postReducer(posts, action) {
+        switch (action.type) {
+            case "initialise":
+                return action.posts;
+
+            case "added":
+                addPost(action.posts)
+                break;
+
+            case "removed":
+
+                break;
+
+            case "updated":
+
+                break;
+        }
     }
 
     return (
-        <EventsContext.Provider value={{posts, setPosts, removePost, addPost, getPost, updatePost}}>
+        <EventsContext.Provider value={{posts, removePost, addPost, getPost, updatePost}}>
             {children}
         </EventsContext.Provider>
     )
