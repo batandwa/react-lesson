@@ -9,13 +9,13 @@ export const EventsProvider = ({children}) => {
 
     useEffect(() => {
         setTimeout(() => {
-            fetch("https://jsonplaceholder.typicode.com/posts")
+            fetch("https://hp-api.onrender.com/api/characters/students")
                 .then(async (response) => {
                     const data = await response.json(); 
                     // setPosts(data.slice(0, 10));
                     dispatch({
                         type: "initialise",
-                        posts: data.slice(0, 10)
+                        posts: data
                     });
                 });
         }, 1000);

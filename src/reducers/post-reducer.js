@@ -4,12 +4,21 @@ function removePost(posts, id) {
     // setPosts(newPosts);
 }
 
-function getPost(posts, id) {
-    // This is the wrong way to do this 
-    // this data should be fetched using an API request.
-    // The data contained in the posts value could be 
-    // outdated.
-    return posts.find((item) => item.id === id);
+// function getPost(posts, id) {
+//     // This is the wrong way to do this 
+//     // this data should be fetched using an API request.
+//     // The data contained in the posts value could be 
+//     // outdated.
+//     return posts.find((item) => item.id === id);
+// }
+
+function search(term) {
+    fetch("https://hp-api.onrender.com/api/characters/students?q=" + term)
+        .then(async (response) => {
+            const data = await response.json(); 
+            // setPosts(data.slice(0, 10));
+            return data;
+        });
 }
 
 function addPost(posts, data) {
@@ -58,6 +67,9 @@ export function postReducer(posts, action) {
 
         case "updated":
             return updatePost(posts, action.id, action.post);
+
+        case "search":
+            return search(action.term);
 
         // case "get":
         //     return getPost(posts, action.id);
