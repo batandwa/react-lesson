@@ -9,8 +9,8 @@ export default function EventForm() {
     function handleSubmit(data) {
         if(!data.get("id")) {
             const post = {
-                title: data.get("title"),
-                body: data.get("body"),
+                name: data.get("name"),
+                ancestry: data.get("ancestry"),
             };
             // addPost(post);
             dispatch({
@@ -19,8 +19,8 @@ export default function EventForm() {
             });
         } else {
             const post = {
-                title: data.get("title"),
-                body: data.get("body"),
+                name: data.get("name"),
+                ancestry: data.get("ancestry"),
             };
             // updatePost(data.get("id"), post);
             dispatch({
@@ -33,7 +33,7 @@ export default function EventForm() {
     }
 
     // const post = getPost(parseInt(id)) || {};
-    const post = posts.find((item) => item.id === parseInt(id));
+    const post = posts.find((item) => item.id === id);
 
     return (
         <>
@@ -42,11 +42,11 @@ export default function EventForm() {
                 <input type="hidden" name="id" defaultValue={post.id} />
                 <div>
                     Title&nbsp;&nbsp;
-                    <input type="text" name="title" defaultValue={post.title} />
+                    <input type="text" name="name" defaultValue={post.name} />
                 </div>
                 <div>
                     Body&nbsp;&nbsp;
-                    <textarea name="body" defaultValue={post.body}></textarea>
+                    <textarea name="ancestry" defaultValue={post.ancestry}></textarea>
                 </div>
                 <div>
                     <input type="submit" />

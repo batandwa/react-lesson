@@ -33,8 +33,8 @@ function addPost(posts, data) {
     }
     updatedPosts.push({
         id: newId,
-        title: data["title"],
-        body: data["body"],
+        title: data["name"],
+        body: data["ancestry"],
     });
 
     // setPosts(updatedPosts);
@@ -44,8 +44,8 @@ function addPost(posts, data) {
 function updatePost(posts, id, data) {
     const updatedPosts = [...posts].map(item => {
         if (item.id == id) {
-            item["title"] = data["title"];
-            item["body"] = data["body"];
+            item["name"] = data["name"];
+            item["ancestry"] = data["ancestry"];
         }
         return item;
     });
