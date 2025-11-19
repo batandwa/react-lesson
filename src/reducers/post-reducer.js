@@ -33,8 +33,8 @@ function addPost(posts, data) {
     }
     updatedPosts.push({
         id: newId,
-        title: data["name"],
-        body: data["ancestry"],
+        name: data["name"],
+        ancestry: data["ancestry"],
     });
 
     // setPosts(updatedPosts);

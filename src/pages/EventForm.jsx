@@ -33,7 +33,7 @@ export default function EventForm() {
     }
 
     // const post = getPost(parseInt(id)) || {};
-    const post = posts.find((item) => item.id === id);
+    const post = posts.find((item) => item.id === parseInt(id)) ?? {};
 
     return (
         <>
@@ -41,12 +41,12 @@ export default function EventForm() {
             <form action={handleSubmit}>
                 <input type="hidden" name="id" defaultValue={post.id} />
                 <div>
-                    Title&nbsp;&nbsp;
+                    Name&nbsp;&nbsp;
                     <input type="text" name="name" defaultValue={post.name} />
                 </div>
                 <div>
-                    Body&nbsp;&nbsp;
-                    <textarea name="ancestry" defaultValue={post.ancestry}></textarea>
+                    Ancestry&nbsp;&nbsp;
+                    <input type="text" name="ancestry" defaultValue={post.ancestry} />
                 </div>
                 <div>
                     <input type="submit" />

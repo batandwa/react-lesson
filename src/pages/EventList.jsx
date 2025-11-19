@@ -19,36 +19,38 @@ export default function EventList() {
         // });
     }
 
-    if(posts && posts.length > 0)
-    return (
-        <>
-            <form action={search}>
-                <div class="mb-3 mt-3">
-                    <label for="email" class="form-label">Email:</label>
-                    <input type="text" class="form-control" placeholder="eg: Harry" name="term" defaultValue={term} ref={searchTermRef} />
-                </div>
-                <Button type="submit" class="btn btn-primary" value="Search">Search</Button>
-            </form>
-            <Navigation title="Main Menu!!">
-                <Link to="/events/new">Add Event</Link>
-                {
-                    posts
-                        .filter(item => item.name.toLowerCase().includes(term))
-                        .map(link => {
-                            return (
-                                <Item 
-                                    key={link.id} 
-                                    text={link.name} 
-                                    title={link.name} 
-                                    itemId={link.id}
-                                    url={`/events/${link.id}`}
-                                />
-                            );
-                        })
-                }
-            </Navigation>
-        </>
-    )
+    if(posts)
+        return (
+            <>
+                <form action={search}>
+                    <div class="mb-3 mt-3">
+                        <label for="email" class="form-label">Email:</label>
+                        <input type="text" class="form-control" placeholder="eg: Harry" name="term" defaultValue={term} ref={searchTermRef} />
+                    </div>
+                    <Button type="submit" class="btn btn-primary" value="Search">Search</Button>
+                </form>
+                <Navigation title="Main Menu!!">
+                    <Link to="/events/new">Add Event</Link>
+                    {
+                        posts
+                            .filter(item => {
+                                return item.name.toLowerCase().includes(term);
+                            })
+                            .map(link => {
+                                return (
+                                    <Item 
+                                        key={link.id} 
+                                        text={link.name} 
+                                        title={link.name} 
+                                        itemId={link.id}
+                                        url={`/events/${link.id}`}
+                                    />
+                                );
+                            })
+                    }
+                </Navigation>
+            </>
+        )
     else 
         return (
             <p>Nothin is here...</p>
