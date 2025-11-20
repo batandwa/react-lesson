@@ -1,6 +1,6 @@
-import { createContext, useContext, useEffect, useReducer, useState } from "react"
-import { postReducer } from "../reducers/post-reducer";
+import { createContext, useContext } from "react";
 import { useLocalStateReducer } from "../hooks/local-state-reducer";
+import { postReducer } from "../reducers/post-reducer";
 
 const EventsContext = createContext();
 
