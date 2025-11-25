@@ -30,8 +30,6 @@ import { useParams, Link } from "react-router-dom";
  *    `https://jsonplaceholder.typicode.com/posts/${id}`. This is a common way to
  *    interact with REST APIs in React.
  *    @see {@link https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API}
- *
- * @returns {JSX.Element} The event details page, showing either a loading message or the event data.
  */
 export default function Event() {
     // `useState` is used to store the fetched post data.

@@ -20,11 +20,6 @@ import Logo from "./Logo";
  *
  * Read more about children:
  * @see {@link https://react.dev/learn/passing-props-to-a-component#passing-jsx-as-children}
- *
- * @param {object} props - The properties passed to the component.
- * @param {string} props.title - The title for the header.
- * @param {React.ReactNode} props.children - Child elements to be rendered.
- * @returns {JSX.Element} The header section containing the logo, children, and title.
  */
 export default function Header(props) {
     return (

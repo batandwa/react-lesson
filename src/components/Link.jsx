@@ -17,12 +17,6 @@
  *
  * Read more about reusable components:
  * @see {@link https://react.dev/learn/thinking-in-react#step-3-break-the-ui-into-a-component-hierarchy}
- *
- * @param {object} props - The properties passed to the component.
- * @param {string} props.url - The URL for the link's href attribute.
- * @param {string} props.title - The title attribute for the link.
- * @param {React.ReactNode} props.children - The content to be rendered within the link.
- * @returns {JSX.Element} An anchor tag element with the specified props.
  */
 export default function Link({url, title, children}) {
     return (

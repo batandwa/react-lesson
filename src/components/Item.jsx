@@ -26,13 +26,6 @@ import CustomLink from "./Link";
  *    action to the context's reducer. This is a common pattern in state management, especially
  *    with useReducer or Redux-like patterns.
  *    @see {@link https://react.dev/learn/extracting-state-logic-into-a-reducer}
- *
- * @param {object} props - The properties passed to the component.
- * @param {string|number} props.itemId - The unique ID of the item.
- * @param {string} props.text - The display text for the item.
- * @param {string} props.title - The title attribute for the item's link.
- * @param {string} props.url - The URL for the item's link.
- * @returns {JSX.Element} A list item element containing links for viewing, editing, and deleting.
  */
 export default function Item(props) {
     // Destructure the `dispatch` function from the `useEvents` custom hook.

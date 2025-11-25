@@ -23,23 +23,12 @@ import { useEffect, useReducer } from "react"
  *    render, making it perfect for reading from `localStorage` without causing
  *    a server-client hydration mismatch or doing it on every render.
  *    @see {@link https://react.dev/reference/react/useReducer#lazy-initialization}
- *
- * @param {function} reducer - The reducer function that specifies how the state gets updated.
- *                             It receives the current state and an action, and returns the new state.
- * @param {any} initial - The initial state value. This is used if `localStorage` is empty or an error occurs.
- * @param {string} key - The key to use for storing the state in `localStorage`.
- * @returns {[any, function]} A tuple containing the current state and the dispatch function.
- *                            - `state`: The current state, initialized from `localStorage` or the `initial` value.
- *                            - `dispatch`: A function to dispatch actions to the reducer, which will update the state.
  */
 export function useLocalStateReducer(reducer, initial, key) {
     /**
      * Initializer function for `useReducer`.
      * This function is called only once during the initial render of the component.
      * It attempts to read the state from `localStorage`.
-     *
-     * @returns {any} The state from `localStorage` if it exists and is valid JSON,
-     *                otherwise, it returns the `initial` state.
      */
     const initializer = () => {
         try {

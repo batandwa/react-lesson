@@ -41,8 +41,6 @@ import { useEvents } from "../context/EventsContext";
  *      @see {@link https://react.dev/learn/forms#controlled-components}
  *      (Note: This uses `defaultValue` for uncontrolled components, which is fine for this example.
  *       For more complex forms, controlled components with `value` and `onChange` are often preferred.)
- *
- * @returns {JSX.Element} The event creation/editing form.
  */
 export default function EventForm() {
     // Destructure `posts` (the array of events) and `dispatch` (the function to update state)

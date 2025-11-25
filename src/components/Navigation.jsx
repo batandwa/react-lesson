@@ -17,11 +17,6 @@
  *
  * Read more about composition with children:
  * @see {@link https://react.dev/learn/passing-props-to-a-component#passing-jsx-as-children}
- *
- * @param {object} props - The properties passed to the component.
- * @param {string} props.title - The title for the navigation.
- * @param {React.ReactNode} props.children - Child elements to be rendered within the navigation list.
- * @returns {JSX.Element} A navigation element containing a title and a list of children.
  */
 export default function Navigation({ title, children }) {
   return (

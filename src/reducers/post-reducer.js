@@ -51,10 +51,6 @@ function removePost(posts, id) {
 //  * already loaded list is generally not the responsibility of a reducer.
 //  * This data should be fetched using an API request, especially if the data
 //  * in the `posts` array could be outdated or incomplete.
-//  *
-//  * @param {Array<Object>} posts - The current array of posts.
-//  * @param {number|string} id - The ID of the post to retrieve.
-//  * @returns {Object|undefined} The found post object, or undefined if not found.
 //  */
 // function getPost(posts, id) {
 //     // This is the wrong way to do this
@@ -65,33 +61,7 @@ function removePost(posts, id) {
 // }
 
 /**
- * Fetches posts from an external API based on a search term.
- * NOTE: This function is an example of a side effect and is NOT a pure reducer function.
- * Reducers should not perform side effects like API calls. This logic would typically
- * be handled in a component's `useEffect` hook or a middleware like Redux Thunk.
- * The `postReducer`'s "search" case calling this is also problematic for the same reason.
- *
- * @param {string} term - The search term to query the API.
- * @returns {Promise<Array<Object>>} A promise that resolves to the array of search results.
- */
-function search(term) {
-    // This is an example of an API call, which is a side effect.
-    // It should not be inside a reducer.
-    fetch("https://hp-api.onrender.com/api/characters/students?q=" + term)
-        .then(async (response) => {
-            const data = await response.json();
-            // In a component, you would use `setPosts(data.slice(0, 10));` to update the state.
-            // A reducer cannot return a promise or handle asynchronous operations directly.
-            return data;
-        });
-}
-
-/**
  * Adds a new post to the posts array.
- *
- * @param {Array<Object>} posts - The current array of posts.
- * @param {Object} data - The data for the new post (e.g., name, ancestry).
- * @returns {Array<Object>} A new array including the new post.
  */
 function addPost(posts, data) {
     // Create a copy of the posts array.
@@ -121,11 +91,6 @@ function addPost(posts, data) {
 
 /**
  * Updates an existing post in the posts array.
- *
- * @param {Array<Object>} posts - The current array of posts.
- * @param {number|string} id - The ID of the post to update.
- * @param {Object} data - The new data for the post (e.g., updated name, ancestry).
- * @returns {Array<Object>} A new array with the specified post updated.
  */
 function updatePost(posts, id, data) {
     // Create a copy of the posts array.
@@ -153,10 +118,6 @@ function updatePost(posts, id, data) {
  * The main reducer function for managing posts.
  * This function is typically used with React's `useReducer` hook. It takes the
  * current `posts` state and an `action` object, and returns the new `posts` state.
- *
- * @param {Array<Object>} posts - The current state (array of posts).
- * @param {object} action - The action object describing the state change.
- * @returns {Array<Object>} The new state (array of posts).
  */
 export function postReducer(posts, action) {
     // Use a switch statement to handle different action types.
@@ -181,15 +142,6 @@ export function postReducer(posts, action) {
             // When a post is updated, call the `updatePost` helper function
             // with the current posts, the ID from `action.id`, and the new data from `action.post`.
             return updatePost(posts, action.id, action.post);
-
-        case "search":
-            // NOTE: This case is problematic. The `search` function performs an
-            // asynchronous API call and does not return a new state array.
-            // Reducers must be synchronous and return the new state.
-            // This pattern should be avoided. Search results should be handled
-            // by fetching data in a component and then dispatching an "initialise"
-            // or "set_search_results" action with the fetched data.
-            return search(action.term); // This will not work as expected with `useReducer`.
 
         // The "get" case is commented out because retrieving a single item
         // is not a state transition for the entire list and is better handled

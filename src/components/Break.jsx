@@ -10,8 +10,6 @@
  *
  * Read more about React components:
  * @see {@link https://react.dev/learn/your-first-component}
- *
- * @returns {JSX.Element} A horizontal rule element.
  */
 export default function Break() {
     return (

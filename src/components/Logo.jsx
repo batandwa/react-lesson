@@ -24,10 +24,6 @@ import logo from '/sample.png';
  *    value for the width if `props.logoWidth` is not passed. This is a simple way to
  *    make props optional.
  *    @see {@link https://react.dev/learn/passing-props-to-a-component#specifying-a-default-value-for-a-prop}
- *
- * @param {object} props - The properties passed to the component.
- * @param {string} [props.logoWidth="200px"] - The width of the logo. Defaults to "200px".
- * @returns {JSX.Element} An image element displaying the logo.
  */
 export default function Logo(props) {
     // Define a styles object for the image.

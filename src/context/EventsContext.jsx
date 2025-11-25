@@ -48,10 +48,6 @@ const EventsContext = createContext();
  *
  * Props:
  * - `children` (ReactNode): The components that will have access to this context.
- *
- * @param {object} props - The properties passed to the component.
- * @param {React.ReactNode} props.children - Child components that will consume this context.
- * @returns {JSX.Element} The Provider component that makes the context available to its children.
  */
 export const EventsProvider = ({children}) => {
     // Initialize state using a custom reducer hook.
@@ -63,7 +59,7 @@ export const EventsProvider = ({children}) => {
     // const [posts, dispatch] = useReducer(postReducer, []); // Example of using standard useReducer.
     const [posts, dispatch] = useLocalStateReducer(postReducer, [], "posts");
 
-    // Example of fetching initial data (commented out).
+    // Example of fetching initial data.
     // This `useEffect` would typically run once when the component mounts to fetch data from an API.
     // The `dispatch` function is then used to update the state with the fetched data.
     // useEffect(() => {
@@ -99,9 +95,5 @@ export const EventsProvider = ({children}) => {
  * making the component code cleaner and providing a single point of definition
  * for how the context is consumed. If the context implementation changes, we only
  * need to update this hook.
- *
- * @returns {{posts: any[], dispatch: function}} The context value containing posts and dispatch.
- * @throws {Error} If this hook is used outside of an EventsProvider, it will throw an error
- *                 because the context value will be undefined.
  */
 export const useEvents = () => useContext(EventsContext);

@@ -76,7 +76,7 @@ export default function EventList() {
             searchTermRef.current.focus();
         }
 
-        // Example of how you might dispatch a search action to a reducer (commented out).
+        // Example of how you might dispatch a search action to a reducer.
         // This would be useful if the search logic or filtered list needed to be
         // managed globally or if the search was more complex.
         // dispatch({
