@@ -49,7 +49,6 @@ Resources:
   CloudFrontOAC:
     Type: AWS::CloudFront::OriginAccessControl
     Properties:
-      Name: WebsiteOAC
       OriginAccessControlConfig:
         Name: WebsiteOACConfig
         Description: Access control for CloudFront to read from S3
@@ -71,6 +70,10 @@ Resources:
         DefaultCacheBehavior:
           TargetOriginId: WebsiteOrigin
           ViewerProtocolPolicy: redirect-to-https
+          ForwardedValues:
+              QueryString : false
+              Cookies :
+                Forward: none
           AllowedMethods:
             - GET
             - HEAD
@@ -83,15 +86,15 @@ Resources:
         ViewerCertificate:
           CloudFrontDefaultCertificate: true
 
-Outputs:
-  WebsiteBucketOutput:
-    Description: Website S3 bucket
-    Value: !Ref WebsiteBucket
+# Outputs:
+#   WebsiteBucketOutput:
+#     Description: Website S3 bucket
+#     Value: !Ref WebsiteBucket
 
-  DownloadsBucketOutput:
-    Description: Downloads S3 bucket
-    Value: !Ref DownloadsBucket
+#   DownloadsBucketOutput:
+#     Description: Downloads S3 bucket
+#     Value: !Ref DownloadsBucket
 
-  CloudFrontURL:
-    Description: CloudFront distribution domain
-    Value: !GetAtt WebsiteDistribution.DomainName
+#   CloudFrontURL:
+#     Description: CloudFront distribution domain
+#     Value: !GetAtt WebsiteDistribution.DomainName
