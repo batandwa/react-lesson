@@ -5,6 +5,8 @@ Resources:
 
   WebsiteBucket:
     Type: AWS::S3::Bucket
+    DeletionPolicy: Delete
+    UpdateReplacePolicy: Delete
     Properties:
       BucketName: bits-training-website
       WebsiteConfiguration:
@@ -15,9 +17,16 @@ Resources:
         BlockPublicPolicy: true
         IgnorePublicAcls: true
         RestrictPublicBuckets: true
+      LifecycleConfiguration:
+        Rules:
+          - Id: EmptyBucketOnDelete
+            Status: Enabled
+            ExpirationInDays: 1
 
   DownloadsBucket:
     Type: AWS::S3::Bucket
+    DeletionPolicy: Delete
+    UpdateReplacePolicy: Delete
     Properties:
       BucketName: bits-training-downloads
       PublicAccessBlockConfiguration:
@@ -28,9 +37,15 @@ Resources:
       WebsiteConfiguration:
         IndexDocument: index.html
         ErrorDocument: index.html
+      LifecycleConfiguration:
+        Rules:
+          - Id: EmptyBucketOnDelete
+            Status: Enabled
+            ExpirationInDays: 1
 
   WebsiteBucketPolicy:
     Type: AWS::S3::BucketPolicy
+    DeletionPolicy: Delete
     Properties:
       Bucket: bits-training-website
       PolicyDocument:
@@ -48,6 +63,7 @@ Resources:
 
   DownloadsBucketPolicy:
     Type: AWS::S3::BucketPolicy
+    DeletionPolicy: Delete
     Properties:
       Bucket: !Ref DownloadsBucket
       PolicyDocument:
@@ -66,6 +82,7 @@ Resources:
 
   CloudFrontOAC:
     Type: AWS::CloudFront::OriginAccessControl
+    DeletionPolicy: Delete
     Properties:
       OriginAccessControlConfig:
         Name: WebsiteOACConfig
@@ -76,6 +93,7 @@ Resources:
 
   DownloadsCloudFrontOAC:
     Type: AWS::CloudFront::OriginAccessControl
+    DeletionPolicy: Delete
     Properties:
       OriginAccessControlConfig:
         Name: DownloadsOACConfig
@@ -86,6 +104,7 @@ Resources:
 
   WebsiteDistribution:
     Type: AWS::CloudFront::Distribution
+    DeletionPolicy: Delete
     Properties:
       DistributionConfig:
         Enabled: true
@@ -119,6 +138,10 @@ Resources:
           - PathPattern: "/downloads/*"
             TargetOriginId: DownloadsOrigin
             ViewerProtocolPolicy: redirect-to-https
+            ForwardedValues:
+                QueryString : false
+                Cookies :
+                  Forward: none
             AllowedMethods:
               - GET
               - HEAD
